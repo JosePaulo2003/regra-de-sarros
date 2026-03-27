@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma - Regra de Sarrus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="flow-wrapper">
+        <header class="flow-header">
+            <h1>FLUXOGRAMA: CÁLCULO DE DETERMINANTE 3×3</h1>
+            <h2>(REGRA DE SARRUS / BORBOLETA)</h2>
+        </header>
+        <section class="manual-inputs" aria-label="Entrada opcional de números para testar a Regra de Sarrus">
+            <button type="button" class="manual-toggle" id="manual-toggle" aria-expanded="false"
+                aria-controls="manual-panel">
+                <span class="toggle-icon" aria-hidden="true">▸</span>
+                <span class="toggle-label">Inserir números manualmente</span>
+                <span class="toggle-helper">(opcional)</span>
+            </button>
+
+            <div class="manual-panel" id="manual-panel" hidden>
+                <p class="manual-note">Preencha a matriz 3×3 abaixo para ver o cálculo completo usando os seus
+                    valores.</p>
+                <div class="manual-grid" role="group" aria-label="Entrada de valores da matriz 3 por 3">
+                    <input type="number" id="11" aria-label="a₁₁" disabled>
+                    <input type="number" id="12" aria-label="a₁₂" disabled>
+                    <input type="number" id="13" aria-label="a₁₃" disabled>
+                    <input type="number" id="21" aria-label="a₂₁" disabled>
+                    <input type="number" id="22" aria-label="a₂₂" disabled>
+                    <input type="number" id="23" aria-label="a₂₃" disabled>
+                    <input type="number" id="31" aria-label="a₃₁" disabled>
+                    <input type="number" id="32" aria-label="a₃₂" disabled>
+                    <input type="number" id="33" aria-label="a₃₃" disabled>
+                </div>
+                <button type="button" class="manual-apply" id="manual-apply" onclick="aplicar_valores()" disabled>
+                    Aplicar números
+                </button>
+            </div>
+        </section>
+        <div id="log" aria-live="polite" aria-atomic="true"></div>
+
+
+        <div id="forma-conceitual">
+            <section class="flow-track" aria-label="Sequência do cálculo do determinante 3×3">
+                <article class="flow-card top">
+                    <span class="flow-label">PASSO 1: TIPO</span>
+                    <p><strong>INÍCIO:</strong> Regra de Sarrus funciona apenas para matrizes 3×3</p>
+                </article>
+
+                <article class="flow-card matrix-viz">
+                    <span class="flow-label">PASSO 2: repetição</span>
+                    <p>Repetir as primeiras duas colunas à direita</p>
+                    <div class="matrix-container">
+                        <div class="matrix-original">
+                            <div class="matrix-row">
+                                <span class="matrix-cell">a₁₁</span>
+                                <span class="matrix-cell">a₁₂</span>
+                                <span class="matrix-cell">a₁₃</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell">a₂₁</span>
+                                <span class="matrix-cell">a₂₂</span>
+                                <span class="matrix-cell">a₂₃</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell">a₃₁</span>
+                                <span class="matrix-cell">a₃₂</span>
+                                <span class="matrix-cell">a₃₃</span>
+                            </div>
+                        </div>
+                        <div class="matrix-repeated">
+                            <div class="matrix-row">
+                                <span class="matrix-cell repeat-1">a₁₁</span>
+                                <span class="matrix-cell repeat-2">a₁₂</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell repeat-1">a₂₁</span>
+                                <span class="matrix-cell repeat-2">a₂₂</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell repeat-1">a₃₁</span>
+                                <span class="matrix-cell repeat-2">a₃₂</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flow-card input diagonal-viz">
+                    <span class="flow-label">PASSO 3: IDENTIFICAR</span>
+                    <p>Identificar e multiplicar os elementos das 3 diagonais principais (para a direita)</p>
+                    <div class="diagonal-container">
+                        <div class="diagonal-grid" role="img"
+                            aria-label="Diagonais principais destacadas na matriz 3×3 com colunas repetidas">
+                            <span class="diag-cell diag1 path" style="--delay:0s;">a₁₁</span>
+                            <span class="diag-cell diag2 path" style="--delay:0.15s;">a₁₂</span>
+                            <span class="diag-cell diag3 path" style="--delay:0.3s;">a₁₃</span>
+                            <span class="diag-cell repeat neutral">a₁₁</span>
+                            <span class="diag-cell repeat neutral">a₁₂</span>
+
+                            <span class="diag-cell repeat neutral">a₂₁</span>
+                            <span class="diag-cell diag1 path" style="--delay:0.45s;">a₂₂</span>
+                            <span class="diag-cell diag2 path" style="--delay:0.6s;">a₂₃</span>
+                            <span class="diag-cell diag3 path" style="--delay:0.75s;">a₂₁</span>
+                            <span class="diag-cell repeat neutral">a₂₂</span>
+
+                            <span class="diag-cell repeat neutral">a₃₁</span>
+                            <span class="diag-cell repeat neutral">a₃₂</span>
+                            <span class="diag-cell diag1 path" style="--delay:0.9s;">a₃₃</span>
+                            <span class="diag-cell diag2 path" style="--delay:1.05s;">a₃₁</span>
+                            <span class="diag-cell diag3 path" style="--delay:1.2s;">a₃₂</span>
+                        </div>
+                        <div class="diagonal-legend" aria-hidden="true">
+                            <div class="legend-item">
+                                <span class="legend-color diag1"></span>
+                                <span>Diagonal 1: a₁₁ × a₂₂ × a₃₃</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color diag2"></span>
+                                <span>Diagonal 2: a₁₂ × a₂₃ × a₃₁</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color diag3"></span>
+                                <span>Diagonal 3: a₁₃ × a₂₁ × a₃₂</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flow-card process sum-viz">
+                    <span class="flow-label">PASSO 4: SOMAR</span>
+                    <p>Somar os três resultados → <strong>SOMA</strong></p>
+                    <div class="sum-container">
+                        <div class="sum-grid" role="img" aria-label="Soma das três diagonais principais">
+                            <div class="sum-row">
+                                <span class="sum-badge">Δ₁</span>
+                                <div class="sum-info">
+                                    <span class="sum-title">Diagonal 1</span>
+                                    <span class="sum-formula" id="diag-p-1-expr">a₁₁ × a₂₂ × a₃₃</span>
+                                </div>
+                                <span class="sum-operator" aria-hidden="true">+</span>
+                                <span class="sum-result result-hidden" id="diag-p-1-valor"></span>
+                            </div>
+                            <div class="sum-row">
+                                <span class="sum-badge">Δ₂</span>
+                                <div class="sum-info">
+                                    <span class="sum-title">Diagonal 2</span>
+                                    <span class="sum-formula" id="diag-p-2-expr">a₁₂ × a₂₃ × a₃₁</span>
+                                </div>
+                                <span class="sum-operator" aria-hidden="true">+</span>
+                                <span class="sum-result result-hidden" id="diag-p-2-valor"></span>
+                            </div>
+                            <div class="sum-row">
+                                <span class="sum-badge">Δ₃</span>
+                                <div class="sum-info">
+                                    <span class="sum-title">Diagonal 3</span>
+                                    <span class="sum-formula" id="diag-p-3-expr">a₁₃ × a₂₁ × a₃₂</span>
+                                </div>
+                                <span class="sum-operator" aria-hidden="true"> </span>
+                                <span class="sum-result result-hidden" id="diag-p-3-valor"></span>
+                            </div>
+                        </div>
+                        <div class="sum-highlight">
+                            <span class="highlight-label" id="soma-detalhe">SOMA = A₁ + B₂ + C₃</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flow-card input input-secondary diagonal-secondary">
+                    <span class="flow-label">PASSO 5: IDENTIFICAR</span>
+                    <p>Identificar e multiplicar os elementos das 3 diagonais secundárias (para a esquerda)</p>
+                    <div class="secondary-container">
+                        <div class="secondary-grid" role="img"
+                            aria-label="Diagonais secundárias destacadas na matriz 3×3 estendida">
+                            <span class="sec-cell sec-neutral">a₁₁</span>
+                            <span class="sec-cell sec-neutral">a₁₂</span>
+                            <span class="sec-cell sec-diag1" style="--delay:0s;">a₁₃</span>
+                            <span class="sec-cell sec-diag2" style="--delay:0.6s;">a₁₁</span>
+                            <span class="sec-cell sec-diag3" style="--delay:0.9s;">a₁₂</span>
+
+                            <span class="sec-cell sec-neutral">a₂₁</span>
+                            <span class="sec-cell sec-diag1" style="--delay:0.15s;">a₂₂</span>
+                            <span class="sec-cell sec-diag2" style="--delay:0.6s;">a₂₃</span>
+                            <span class="sec-cell sec-diag3" style="--delay:1.05s;">a₂₁</span>
+                            <span class="sec-cell sec-neutral">a₂₂</span>
+
+                            <span class="sec-cell sec-diag1" style="--delay:0.3s;">a₃₁</span>
+                            <span class="sec-cell sec-diag2" style="--delay:0.75s;">a₃₂</span>
+                            <span class="sec-cell sec-diag3" style="--delay:1.2s;">a₃₃</span>
+                            <span class="sec-cell sec-neutral">a₃₁</span>
+                            <span class="sec-cell sec-neutral">a₃₂</span>
+                        </div>
+                        <div class="diagonal-legend secondary-legend" aria-hidden="true">
+                            <div class="legend-item">
+                                <span class="legend-color sec1"></span>
+                                <span>Diagonal 1: a₃₁ × a₂₂ × a₁₃</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color sec2"></span>
+                                <span>Diagonal 2: a₃₂ × a₂₃ × a₁₁</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color sec3"></span>
+                                <span>Diagonal 3: a₃₃ × a₂₁ × a₁₂</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flow-card process sum2-viz">
+                    <span class="flow-label">PASSO 6: SOMA 2</span>
+                    <p>Somar os resultados da secundária → <strong>SUB</strong></p>
+                    <div class="sum2-container">
+                        <div class="sum2-grid" role="img" aria-label="Soma das três diagonais secundárias">
+                            <div class="sum2-row">
+                                <span class="sum2-badge">Δ₁′</span>
+                                <div class="sum2-info">
+                                    <span class="sum2-title">Diagonal 1</span>
+                                    <span class="sum2-formula" id="diag-s-1-expr">a₃₁ × a₂₂ × a₁₃</span>
+                                </div>
+                                <span class="sum2-operator" aria-hidden="true">−</span>
+                                <span class="sum2-result result-hidden" id="diag-s-1-valor"></span>
+                            </div>
+                            <div class="sum2-row">
+                                <span class="sum2-badge">Δ₂′</span>
+                                <div class="sum2-info">
+                                    <span class="sum2-title">Diagonal 2</span>
+                                    <span class="sum2-formula" id="diag-s-2-expr">a₃₂ × a₂₃ × a₁₁</span>
+                                </div>
+                                <span class="sum2-operator" aria-hidden="true">−</span>
+                                <span class="sum2-result result-hidden" id="diag-s-2-valor"></span>
+                            </div>
+                            <div class="sum2-row">
+                                <span class="sum2-badge">Δ₃′</span>
+                                <div class="sum2-info">
+                                    <span class="sum2-title">Diagonal 3</span>
+                                    <span class="sum2-formula" id="diag-s-3-expr">a₃₃ × a₂₁ × a₁₂</span>
+                                </div>
+                                <span class="sum2-operator" aria-hidden="true"> </span>
+                                <span class="sum2-result result-hidden" id="diag-s-3-valor"></span>
+                            </div>
+                        </div>
+                        <div class="sum2-highlight">
+                            <span class="sum2-label" id="sub-detalhe">SUB = 0</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flow-card output det-output">
+                    <span class="flow-label">PASSO 7: RESULTADO</span>
+                    <p><strong>Exibir resultado</strong> (Determinante)</p>
+                    <div class="output-container">
+                        <div class="output-panel" role="img" aria-label="Determinante final calculado">
+                            <span class="output-symbol">|A|</span>
+                            <span class="output-number" id="determinant-expression">= SOMA − SUB</span>
+                        </div>
+                        <p class="output-note" id="determinant-note">Determinante obtido: SOMA − SUB pela Regra de Sarrus</p>
+                    </div>
+                </article>
+            </section>
+
+        </div>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
