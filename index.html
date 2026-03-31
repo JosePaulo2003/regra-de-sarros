@@ -49,6 +49,25 @@
                 <article class="flow-card top">
                     <span class="flow-label">PASSO 1: TIPO</span>
                     <p><strong>INÍCIO:</strong> Regra de Sarrus funciona apenas para matrizes 3×3</p>
+                    <div class="matrix-container">
+                        <div class="matrix-original">
+                            <div class="matrix-row">
+                                <span class="matrix-cell">1</span>
+                                <span class="matrix-cell">2</span>
+                                <span class="matrix-cell">3</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell">4</span>
+                                <span class="matrix-cell">5</span>
+                                <span class="matrix-cell">6</span>
+                            </div>
+                            <div class="matrix-row">
+                                <span class="matrix-cell">7</span>
+                                <span class="matrix-cell">8</span>
+                                <span class="matrix-cell">9</span>
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="flow-card matrix-viz">
@@ -136,7 +155,7 @@
                     <div class="sum-container">
                         <div class="sum-grid" role="img" aria-label="Soma das três diagonais principais">
                             <div class="sum-row">
-                                <span class="sum-badge">Δ₁</span>
+                                <span class="sum-badge">A₁</span>
                                 <div class="sum-info">
                                     <span class="sum-title">Diagonal 1</span>
                                     <span class="sum-formula" id="diag-p-1-expr">a₁₁ × a₂₂ × a₃₃</span>
@@ -145,7 +164,7 @@
                                 <span class="sum-result result-hidden" id="diag-p-1-valor"></span>
                             </div>
                             <div class="sum-row">
-                                <span class="sum-badge">Δ₂</span>
+                                <span class="sum-badge">B₂</span>
                                 <div class="sum-info">
                                     <span class="sum-title">Diagonal 2</span>
                                     <span class="sum-formula" id="diag-p-2-expr">a₁₂ × a₂₃ × a₃₁</span>
@@ -154,7 +173,7 @@
                                 <span class="sum-result result-hidden" id="diag-p-2-valor"></span>
                             </div>
                             <div class="sum-row">
-                                <span class="sum-badge">Δ₃</span>
+                                <span class="sum-badge">C₃</span>
                                 <div class="sum-info">
                                     <span class="sum-title">Diagonal 3</span>
                                     <span class="sum-formula" id="diag-p-3-expr">a₁₃ × a₂₁ × a₃₂</span>
@@ -171,7 +190,7 @@
 
                 <article class="flow-card input input-secondary diagonal-secondary">
                     <span class="flow-label">PASSO 5: IDENTIFICAR</span>
-                    <p>Identificar e multiplicar os elementos das 3 diagonais secundárias (para a esquerda)</p>
+                    <p>Identificar e multiplicar os elementos das 3 diagonais secundárias (para a esquerda) - valores negativos</p>
                     <div class="secondary-container">
                         <div class="secondary-grid" role="img"
                             aria-label="Diagonais secundárias destacadas na matriz 3×3 estendida">
@@ -216,25 +235,25 @@
                     <div class="sum2-container">
                         <div class="sum2-grid" role="img" aria-label="Soma das três diagonais secundárias">
                             <div class="sum2-row">
-                                <span class="sum2-badge">Δ₁′</span>
+                                <span class="sum2-badge">X₁</span>
                                 <div class="sum2-info">
                                     <span class="sum2-title">Diagonal 1</span>
                                     <span class="sum2-formula" id="diag-s-1-expr">a₃₁ × a₂₂ × a₁₃</span>
                                 </div>
-                                <span class="sum2-operator" aria-hidden="true">−</span>
+                                <span class="sum2-operator" aria-hidden="true">+</span>
                                 <span class="sum2-result result-hidden" id="diag-s-1-valor"></span>
                             </div>
                             <div class="sum2-row">
-                                <span class="sum2-badge">Δ₂′</span>
+                                <span class="sum2-badge">Y₂</span>
                                 <div class="sum2-info">
                                     <span class="sum2-title">Diagonal 2</span>
                                     <span class="sum2-formula" id="diag-s-2-expr">a₃₂ × a₂₃ × a₁₁</span>
                                 </div>
-                                <span class="sum2-operator" aria-hidden="true">−</span>
+                                <span class="sum2-operator" aria-hidden="true">+</span>
                                 <span class="sum2-result result-hidden" id="diag-s-2-valor"></span>
                             </div>
                             <div class="sum2-row">
-                                <span class="sum2-badge">Δ₃′</span>
+                                <span class="sum2-badge">Z₃</span>
                                 <div class="sum2-info">
                                     <span class="sum2-title">Diagonal 3</span>
                                     <span class="sum2-formula" id="diag-s-3-expr">a₃₃ × a₂₁ × a₁₂</span>
@@ -244,7 +263,7 @@
                             </div>
                         </div>
                         <div class="sum2-highlight">
-                            <span class="sum2-label" id="sub-detalhe">SUB = 0</span>
+                            <span class="sum2-label" id="sub-detalhe">SUB = X₁ + Y₂ + Z₃</span>
                         </div>
                     </div>
                 </article>
@@ -255,9 +274,9 @@
                     <div class="output-container">
                         <div class="output-panel" role="img" aria-label="Determinante final calculado">
                             <span class="output-symbol">|A|</span>
-                            <span class="output-number" id="determinant-expression">= SOMA − SUB</span>
+                            <span class="output-number" id="determinant-expression">= SOMA + SUB</span>
                         </div>
-                        <p class="output-note" id="determinant-note">Determinante obtido: SOMA − SUB pela Regra de Sarrus</p>
+                        <p class="output-note" id="determinant-note">Determinante obtido: SOMA + SUB pela Regra de Sarrus</p>
                     </div>
                 </article>
             </section>
@@ -269,3 +288,5 @@
 </body>
 
 </html>
+
+

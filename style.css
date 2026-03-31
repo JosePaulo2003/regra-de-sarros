@@ -112,7 +112,7 @@ body {
 }
 
 .manual-note {
-    margin: 0;
+    margin: 0 0 12px 0;
     font-size: 0.9rem;
     color: #1e3a8a;
     background: rgba(191, 219, 254, 0.4);
@@ -302,6 +302,14 @@ body {
 
 .flow-card.top .flow-label {
     background: linear-gradient(135deg, #6b7280, #475569);
+}
+
+.flow-card.top:hover .matrix-container {
+    margin: 14px 0 0;
+    max-height: 360px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .flow-card.process {
@@ -1402,6 +1410,35 @@ body {
 
 .legend-color.diag3 {
     background: linear-gradient(135deg, #ddd6fe, #7c3aed);
+}
+
+@media (max-width: 640px) {
+    .flow-track {
+        padding: 40px 20px;
+        gap: 22px;
+    }
+
+    .flow-card {
+        padding: 20px 22px;
+        font-size: 0.95rem;
+    }
+
+    .matrix-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .matrix-cell {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .diagonal-cell {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
 }
 
 @media (max-width: 640px) {

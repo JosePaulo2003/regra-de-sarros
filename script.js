@@ -7,7 +7,11 @@ function formatarNumero(valor) {
     if (Math.abs(valor) < 0.0000001) {
         return "0";
     }
-    return String(valor);
+    var resultado = String(valor);
+    if (valor < 0) {
+        return "(" + resultado + ")";
+    }
+    return resultado;
 }
 
 // Lê a matriz 3x3 dos campos de texto
